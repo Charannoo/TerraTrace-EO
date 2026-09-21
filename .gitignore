@@ -23,6 +23,9 @@ checkpoints/
 # Runtime / generated artefacts
 data/test-temp/
 data/generated/
+data/uploads/
+data/*.sqlite3
+indexes/
 *.log
 
 # OS / editor
