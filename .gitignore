@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+build/
+*.egg-info/
+dist/*.egg
+
+# Virtual environments
+.venv/
+venv/
+remoteclip-env/
+env/
+
+# RemoteCLIP downloaded artifacts
+.remoteclip/
+checkpoints/
+*.safetensors
+*.pt
+*.pth
+
+# Runtime / generated artefacts
+data/test-temp/
+data/generated/
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

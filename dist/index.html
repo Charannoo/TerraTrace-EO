@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07110f" />
+    <meta
+      name="description"
+      content="TerraTrace EO — an offline, evidence-first Earth observation analyst workbench for SIH26227."
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2307110f'/%3E%3Cpath d='M6 10h20M10 6v20M6 22h20M22 6v20' stroke='%2337e49b' stroke-width='1.4' opacity='.55'/%3E%3Ccircle cx='16' cy='16' r='5' fill='none' stroke='%23e8fff5' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='1.8' fill='%2337e49b'/%3E%3C/svg%3E"
+    />
+    <title>TerraTrace EO — SIH26227</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <div class="brand-block">
+          <div class="brand-mark" aria-hidden="true">
+            <span></span>
+          </div>
+          <div>
+            <p class="brand-name">TerraTrace <b>EO</b></p>
+            <p class="brand-code">SIH26227</p>
+          </div>
+        </div>
+
+        <div class="system-chip" id="systemStatus"><i></i> Connecting local engine</div>
+
+        <nav class="nav-list" role="tablist" aria-label="Workspaces">
+          <button class="nav-item active" type="button" role="tab" aria-selected="true" data-view="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+            <span>Semantic search</span><kbd>1</kbd>
+          </button>
+          <button class="nav-item" type="button" role="tab" aria-selected="false" data-view="timeline">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V6"></path><path d="M4 12h5l3-5 3 10 2-5h3"></path></svg>
+            <span>Change timeline</span><kbd>2</kbd>
+          </button>
+          <button class="nav-item" type="button" role="tab" aria-selected="false" data-view="evidence">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 7v5c0 4.8 3.2 7.8 7.5 9 4.3-1.2 7.5-4.2 7.5-9V7L12 3Z"></path><path d="m9 12 2 2 4-4"></path></svg>
+            <span>Evidence viewer</span><kbd>3</kbd>
+          </button>
+          <button class="nav-item" type="button" role="tab" aria-selected="false" data-view="similar">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><path d="M14 17.5h7M17.5 14v7"></path></svg>
+            <span>Similar sites</span><kbd>4</kbd>
+          </button>
+          <button class="nav-item" type="button" role="tab" aria-selected="false" data-view="review">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8"></path><path d="M9 3h6v3H9z"></path><rect x="5" y="5" width="14" height="16" rx="2"></rect><path d="m9 13 2 2 4-4"></path></svg>
+            <span>Review queue</span><span class="nav-count" id="queueCount">3</span>
+          </button>
+        </nav>
+
+        <div class="archive-card">
+          <div class="archive-head">
+            <span>Local archive</span>
+            <span class="archive-health">Healthy</span>
+          </div>
+          <strong id="sceneCount">5 scenes</strong>
+          <div class="meter"><span></span></div>
+          <div class="archive-meta"><span id="archiveMeta">SQLite · local index</span><span id="archivePercent">Ready</span></div>
+          <button class="text-button" id="ingestButton" type="button">Ingest local image pair <span>+</span></button>
+        </div>
+
+        <div class="sidebar-foot">
+          <span>Index</span><b>RCLIP-B32 · v0.7.4</b>
+          <span>Last verified</span><b>14 Sep 2026 · 09:42</b>
+        </div>
+      </aside>
+
+      <main class="main-stage">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="viewEyebrow">DISCOVERY / SEMANTIC RETRIEVAL</p>
+            <h1 id="viewTitle">Search the local archive</h1>
+          </div>
+          <div class="top-actions">
+            <div class="demo-badge"><span>DEMO</span> Synthetic case data</div>
+            <button class="icon-button" id="helpButton" type="button" aria-label="Keyboard shortcuts">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M9.8 9a2.3 2.3 0 0 1 4.5.8c0 1.7-2.3 2-2.3 3.7"></path><path d="M12 17h.01"></path></svg>
+            </button>
+            <div class="operator"><span>AK</span><div><b>Analyst K-07</b><small>LOCAL SESSION</small></div></div>
+          </div>
+        </header>
+
+        <section class="view active" id="view-search" aria-labelledby="viewTitle">
+          <div class="search-command">
+            <div class="query-box">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+              <label class="sr-only" for="semanticQuery">Semantic archive query</label>
+              <input id="semanticQuery" value="industrial construction near a river" autocomplete="off" />
+              <kbd>/</kbd>
+            </div>
+            <button class="primary-button" id="searchButton" type="button">
+              <span>Run search</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </button>
+          </div>
+
+          <div class="filter-row" aria-label="Search filters">
+            <label class="filter-field"><span>Area of interest</span><select id="aoiFilter"><option>Narmada corridor · 42,680 km²</option><option>All indexed areas</option><option>Western logistics belt</option></select></label>
+            <label class="filter-field"><span>Date range</span><select id="dateFilter"><option>Jan 2021 — Sep 2026</option><option>Last 12 months</option><option>All dates</option></select></label>
+            <label class="filter-field"><span>Sensor</span><select id="sensorFilter"><option>Sentinel-2 L2A</option><option>All sensors</option><option>Landsat C2 L2</option></select></label>
+            <label class="filter-field cloud-field"><span>Max cloud <b id="cloudValue">15%</b></span><input id="cloudFilter" type="range" min="0" max="60" value="15" /></label>
+            <button class="reset-button" id="resetFilters" type="button">Reset</button>
+          </div>
+
+          <div class="search-workspace">
+            <article class="map-panel panel">
+              <div class="panel-head">
+                <div><span class="status-dot"></span><b>Spatial results</b><small id="mapMeta">5 of 328 tiles · exact vector search</small></div>
+                <div class="map-tools" role="group" aria-label="Map appearance">
+                  <button class="compact-button active" data-map="rgb" type="button">RGB</button>
+                  <button class="compact-button" data-map="ndvi" type="button">NDVI</button>
+                  <button class="compact-button" data-map="quality" type="button">Quality</button>
+                </div>
+              </div>
+              <div class="map-canvas satellite-surface after-surface" id="searchMap">
+                <div class="coord-grid"></div>
+                <div class="aoi-outline"><span>AOI-04</span></div>
+                <button class="map-pin pin-1 selected" type="button" data-result="0" aria-label="Select result 1"><span>1</span></button>
+                <button class="map-pin pin-2" type="button" data-result="1" aria-label="Select result 2"><span>2</span></button>
+                <button class="map-pin pin-3" type="button" data-result="2" aria-label="Select result 3"><span>3</span></button>
+                <button class="map-pin pin-4" type="button" data-result="3" aria-label="Select result 4"><span>4</span></button>
+                <button class="map-pin pin-5" type="button" data-result="4" aria-label="Select result 5"><span>5</span></button>
+                <div class="map-scale"><span></span> 5 km</div>
+                <div class="map-coords">22.7816° N · 77.7219° E</div>
+                <div class="north-arrow"><span>N</span><i></i></div>
+                <div class="scan-line" id="scanLine"></div>
+              </div>
+              <div class="map-foot"><span>EPSG:32643</span><span>10 m / px</span><span>Local vector tiles</span><b>NETWORK: DISABLED</b></div>
+            </article>
+
+            <aside class="results-panel panel" aria-label="Search results">
+              <div class="results-head"><div><b>Ranked candidates</b><small id="resultSummary">5 matches in 38 ms</small></div><button id="sortButton" type="button">Score ↓</button></div>
+              <div class="result-list" id="resultList"></div>
+            </aside>
+          </div>
+
+          <article class="selection-strip panel" id="selectionStrip"></article>
+        </section>
+
+        <section class="view" id="view-timeline" aria-labelledby="viewTitle">
+          <div class="case-head panel">
+            <div><p class="case-id" id="caseId">CASE TTE-2026-017 · SELECTED FROM SEMANTIC SEARCH</p><h2 id="caseName">River-adjacent logistics expansion</h2><p id="caseLocation">Hoshangabad district · Sentinel-2 L2A · 22.7816° N, 77.7219° E</p></div>
+            <div class="case-confidence"><span>SUPPORT SCORE</span><strong id="caseSupport">0.87</strong><small id="caseMethod">calibration pending</small></div>
+          </div>
+
+          <article class="timeline-card panel">
+            <div class="section-title"><div><p class="eyebrow">TEMPORAL REASONING</p><h2>Earliest defensible change interval</h2></div><div class="interval-chip">08 Nov 2021 <b>→</b> 17 Jan 2022</div></div>
+            <div class="timeline-track" id="timelineTrack">
+              <div class="timeline-line"></div>
+              <button class="time-node clear" type="button" data-time="Baseline: clear, no change"><i></i><b>08 Nov ’21</b><span>NO CHANGE</span><small>4% cloud</small></button>
+              <button class="time-node rejected" type="button" data-time="Rejected observation: cloud and shadow contamination"><i></i><b>21 Dec ’21</b><span>REJECTED</span><small>63% cloud</small></button>
+              <button class="time-node candidate" type="button" data-time="First usable observation supporting construction"><i></i><b>17 Jan ’22</b><span>FIRST SUPPORT</span><small>7% cloud</small></button>
+              <button class="time-node confirmed" type="button" data-time="Next usable observation confirms persistence"><i></i><b>06 Feb ’22</b><span>CONFIRMED</span><small>3% cloud</small></button>
+              <button class="time-node confirmed" type="button" data-time="Change persists in later archive observation"><i></i><b>18 Mar ’22</b><span>PERSISTS</span><small>9% cloud</small></button>
+            </div>
+            <div class="timeline-readout" id="timelineReadout"><span>Selected evidence</span><b>First usable observation supporting construction</b></div>
+          </article>
+
+          <div class="timeline-grid">
+            <article class="compare-card panel">
+              <div class="panel-head"><div><span class="status-dot"></span><b>Aligned observation pair</b><small>Drag the divider to inspect change</small></div><span class="qa-pass">REGISTRATION QA · PASS</span></div>
+              <div class="compare-view" id="timelineCompare">
+                <div class="satellite-surface before-surface compare-layer"></div>
+                <div class="satellite-surface after-surface compare-layer after-clip" id="timelineAfter"><div class="change-polygon"></div></div>
+                <div class="compare-divider" id="timelineDivider"><i></i></div>
+                <span class="image-label before-label"><b>BEFORE</b> 08 NOV 2021</span>
+                <span class="image-label after-label"><b>AFTER</b> 17 JAN 2022</span>
+                <input class="compare-range" id="timelineRange" type="range" min="4" max="96" value="54" aria-label="Before and after comparison position" />
+              </div>
+            </article>
+            <article class="finding-card panel">
+              <p class="eyebrow">SUPPORTED FINDING</p>
+              <h2>Likely construction</h2>
+              <p>The event occurred after the last usable non-change observation and no later than the first supporting acquisition.</p>
+              <dl><div><dt>Changed area</dt><dd>18.4 ha</dd></div><div><dt>Last usable non-change</dt><dd>08 Nov 2021</dd></div><div><dt>First supporting observation</dt><dd>17 Jan 2022</dd></div><div><dt>Persistence confirmation</dt><dd>06 Feb 2022</dd></div></dl>
+              <button class="primary-button full" type="button" data-go="evidence">Inspect supporting evidence <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="view-evidence" aria-labelledby="viewTitle">
+          <div class="evidence-layout">
+            <article class="evidence-main panel">
+              <div class="panel-head"><div><span class="status-dot"></span><b>Source imagery comparison</b><small id="evidenceSource">Sentinel-2 L2A · T43QGE · common 10 m grid</small></div><button class="evidence-mode" id="runAnalysis" type="button">RUN MEASURED ANALYSIS</button></div>
+              <div class="compare-view evidence-compare">
+                <div class="satellite-surface before-surface compare-layer"></div>
+                <div class="satellite-surface after-surface compare-layer after-clip" id="evidenceAfter"><div class="change-polygon evidence-poly"></div></div>
+                <img class="change-mask-image" id="changeMaskImage" alt="Measured change mask overlay" />
+                <div class="quality-hatch" id="qualityHatch"></div>
+                <div class="registration-grid" id="registrationGrid"></div>
+                <div class="compare-divider" id="evidenceDivider"><i></i></div>
+                <span class="image-label before-label"><b>BEFORE</b> S2B · 08 NOV 2021</span>
+                <span class="image-label after-label"><b>AFTER</b> S2A · 17 JAN 2022</span>
+                <input class="compare-range" id="evidenceRange" type="range" min="4" max="96" value="50" aria-label="Before and after evidence comparison position" />
+              </div>
+              <div class="layer-bar">
+                <span>DISPLAY LAYERS</span>
+                <label><input id="changeLayer" type="checkbox" checked /> <i></i> Change polygon</label>
+                <label><input id="qualityLayer" type="checkbox" /> <i></i> Quality mask</label>
+                <label><input id="gridLayer" type="checkbox" /> <i></i> Registration grid</label>
+                <div class="coordinate-readout">E 778243 · N 2521150 · Z43N</div>
+              </div>
+              <div class="evidence-metrics">
+                <div><span>Detected area</span><strong><b id="detectedArea">18.4</b> <small>ha</small></strong></div><div><span>Registration residual</span><strong><b id="registrationResidual">0.28</b> <small>px</small></strong></div><div><span>Changed pixels</span><strong><b id="changedPixels">19.2</b><small>%</small></strong></div><div><span>Usable pixels</span><strong><b id="usablePixels">100</b><small>%</small></strong></div>
+              </div>
+            </article>
+
+            <aside class="evidence-side">
+              <article class="panel checks-card">
+                <div class="section-title compact"><div><p class="eyebrow">QUALITY GATES</p><h2>Evidence checks</h2></div><span>6/6 pass</span></div>
+                <ul class="check-list">
+                  <li><i>✓</i><div><b>Cloud / shadow rejected</b><small>SCL mask + 20 m buffer</small></div><span>PASS</span></li>
+                  <li><i>✓</i><div><b>Registration QA</b><small id="registrationCheck">Residual below 1.5 px</small></div><span id="registrationGate">PASS</span></li>
+                  <li><i>✓</i><div><b>Radiometric consistency</b><small>Robust MAD normalisation</small></div><span>PASS</span></li>
+                  <li><i>✓</i><div><b>Measured RGB evidence</b><small id="differenceCheck">Robust pairwise difference</small></div><span>PASS</span></li>
+                  <li><i>✓</i><div><b>Minimum mapping area</b><small>18.4 ha &gt; 0.5 ha</small></div><span>PASS</span></li>
+                  <li><i>✓</i><div><b>Temporal persistence</b><small>Confirmed 06 Feb 2022</small></div><span>PASS</span></li>
+                </ul>
+              </article>
+              <article class="panel provenance-card">
+                <div class="section-title compact"><div><p class="eyebrow">CHAIN OF CUSTODY</p><h2>Provenance</h2></div><button class="copy-button" id="copyProvenance" type="button">Copy</button></div>
+                <dl><div><dt>Before scene</dt><dd id="beforeScene">S2B_MSIL2A_20211108_T43QGE</dd></div><div><dt>After scene</dt><dd id="afterScene">S2A_MSIL2A_20220117_T43QGE</dd></div><div><dt>Processing run</dt><dd id="processingRun">not measured this session</dd></div><div><dt>Pipeline</dt><dd id="pipelineName">robust-rgb-difference-v1</dd></div><div><dt>Asset hashes</dt><dd id="assetHashState">Pending live verification</dd></div></dl>
+              </article>
+            </aside>
+          </div>
+          <article class="review-action panel">
+            <div><p class="eyebrow">ANALYST DECISION</p><h2 id="decisionTitle">This candidate has not been reviewed</h2><p id="decisionNote">Your decision is stored locally with the evidence and model version.</p></div>
+            <div class="decision-buttons"><button class="decision uncertain" data-decision="uncertain" type="button">Mark uncertain</button><button class="decision reject" data-decision="rejected" type="button">Reject</button><button class="decision confirm" data-decision="confirmed" type="button">Confirm change</button></div>
+          </article>
+        </section>
+
+        <section class="view" id="view-similar" aria-labelledby="viewTitle">
+          <div class="similar-head panel">
+            <div class="reference-thumb satellite-surface after-surface"><span>REFERENCE</span></div>
+            <div><p class="eyebrow">IMAGE-TO-IMAGE RETRIEVAL</p><h2>Sites visually similar to TTE-2026-017</h2><p>Exact cosine search across 98,420 normalised RemoteCLIP vectors. Spatial duplicates suppressed.</p></div>
+            <div class="similar-controls"><label>Minimum score <b id="similarValue">0.72</b><input id="similarRange" type="range" min="55" max="90" value="72" /></label><button class="primary-button" id="refreshSimilar" type="button">Refresh set</button></div>
+          </div>
+          <div class="similar-grid" id="similarGrid"></div>
+        </section>
+
+        <section class="view" id="view-review" aria-labelledby="viewTitle">
+          <div class="review-summary">
+            <article class="metric-card panel"><span>Awaiting review</span><strong id="pendingMetric">3</strong><small>high-support candidates</small></article>
+            <article class="metric-card panel"><span>Confirmed today</span><strong id="confirmedMetric">12</strong><small>+4 from yesterday</small></article>
+            <article class="metric-card panel"><span>Rejected today</span><strong id="rejectedMetric">7</strong><small>mainly seasonal change</small></article>
+            <article class="metric-card panel"><span>Median review time</span><strong>01:42</strong><small>minutes per candidate</small></article>
+          </div>
+          <article class="queue-card panel">
+            <div class="section-title"><div><p class="eyebrow">PRIORITISED BY SUPPORT × IMPACT</p><h2>Analyst review queue</h2></div><div class="queue-actions"><button id="exportAudit" type="button">Export audit JSON</button><button id="resetDemo" type="button">Reset demo</button></div></div>
+            <div class="queue-table" id="queueTable"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"><i></i><div><b id="toastTitle"></b><span id="toastMessage"></span></div></div>
+    <dialog id="shortcutDialog">
+      <div class="dialog-head"><div><p class="eyebrow">LOCAL CONTROLS</p><h2>Keyboard shortcuts</h2></div><button id="closeDialog" type="button" aria-label="Close">×</button></div>
+      <dl class="shortcut-list"><div><dt><kbd>/</kbd></dt><dd>Focus semantic search</dd></div><div><dt><kbd>1 — 5</kbd></dt><dd>Switch workspace</dd></div><div><dt><kbd>Esc</kbd></dt><dd>Close this panel</dd></div></dl>
+    </dialog>
+    <dialog id="ingestDialog" class="ingest-dialog">
+      <form id="ingestForm">
+        <div class="dialog-head"><div><p class="eyebrow">LOCAL INGESTION</p><h2>Index a comparison pair</h2></div><button id="closeIngest" type="button" aria-label="Close">×</button></div>
+        <p class="dialog-copy">Select two aligned RGB images of the same area. The local engine stores them in SQLite, measures change, and adds the record to search.</p>
+        <div class="ingest-grid">
+          <label><span>Case name</span><input name="name" value="Local construction case" required /></label>
+          <label><span>Location / AOI</span><input name="location" value="Internal hackathon AOI" required /></label>
+          <label><span>Before date</span><input name="before_date" type="date" value="2024-01-10" required /></label>
+          <label><span>After date</span><input name="after_date" type="date" value="2024-03-15" required /></label>
+          <label><span>Sensor</span><input name="sensor" value="RGB local imagery" required /></label>
+          <label><span>AOI area (ha)</span><input name="aoi_area_ha" type="number" min="1" value="100" required /></label>
+          <label class="file-field"><span>Before image</span><input id="beforeFile" type="file" accept="image/png,image/jpeg,image/tiff" required /></label>
+          <label class="file-field"><span>After image</span><input id="afterFile" type="file" accept="image/png,image/jpeg,image/tiff" required /></label>
+        </div>
+        <div class="dialog-actions"><button class="reset-button" id="cancelIngest" type="button">Cancel</button><button class="primary-button" id="submitIngest" type="submit">Ingest and analyse</button></div>
+      </form>
+    </dialog>
+    <script src="./app.js"></script>
+  </body>
+</html>

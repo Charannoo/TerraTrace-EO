@@ -1,0 +1,6 @@
+-r requirements.txt
+torch
+torchvision
+open-clip-torch==3.3.0
+huggingface-hub
+
